@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.text-center {
+  text-align: center;
+  color: green;
+}
+
+.input-control {
+  background-color: lightgreen;
+  /* border-radius: 20px; */
+  outline: 0;
+  padding: 5px 10px;
+  border: none;
+}
+.input-control:focus {
+  box-shadow: 0 0 5px 0 darkmagenta;
+}
+
+.btn-save {
+  background-color: rgb(6, 102, 236);
+  padding: 5px 15px;
+  /* transform: skewX(-10deg); */
+  color: wheat;
+  border: none;
+  /* margin: 0 5px; */
+}
+
+.btn-save:active {
+  box-shadow: 0 0 5px 0 darkmagenta;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+.list {
+  width: 30%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.list > li {
+  border: 1px solid magenta;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.list > li:hover {
+  background-color: magenta;
+  color: white;
+}
