@@ -1,29 +1,22 @@
 import { useState } from "react";
+import TodoList from "./TodoList";
+import TodoInput from "./TodoInput";
+import { Link, Outlet } from "react-router-dom";
 
 const Todo = () => {
-  let [text, setText] = useState("deepak"); // [value,updateFunction]
-
-  // click operation on button
-  let changeText = () => {
-    setText("Edureka");
-  };
   return (
     <>
-      <h1>{text}</h1>
-      <section className="flex">
-        <input type="text" placeholder="Enter Todo" className="input-control" />
-        <button className="btn-save" onClick={changeText}>
-          Save
-        </button>
-      </section>
-      <section>
-        <ul className="list">
-          <li>Task-1</li>
-          <li>Task-1</li>
-          <li>Task-1</li>
-          <li>Task-1</li>
-        </ul>
-      </section>
+      <ul className="menu">
+        <li>
+          <Link to="/todo/input">Add Todo</Link>
+        </li>
+        <li>
+          <Link to="/todo/list">Todo List</Link>
+        </li>
+      </ul>
+      <h1 className="text-center">Todo Application</h1>
+
+      <Outlet />
     </>
   );
 };

@@ -61,3 +61,19 @@ body {
   background-color: magenta;
   color: white;
 }
+
+.menu {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu li a {
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.menu li:hover a {
+  text-decoration: underline;
+  color: red;
+}
