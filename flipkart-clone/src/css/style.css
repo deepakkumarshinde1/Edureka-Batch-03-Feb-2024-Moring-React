@@ -530,3 +530,16 @@ img.cartpImg {
 .page-not-found a {
   font-size: 3rem;
 }
+
+.border-1 {
+  border-bottom: 1px solid transparent;
+}
+
+.border-1:hover {
+  border-bottom: 1px solid black;
+}
+
+.svg {
+  height: 100px;
+  width: 100px;
+}

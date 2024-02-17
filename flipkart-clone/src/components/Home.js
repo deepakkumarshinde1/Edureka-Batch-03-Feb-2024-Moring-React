@@ -1,77 +1,51 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { saveCategories } from "../redux/product.slice";
+import { useDispatch, useSelector } from "react-redux";
+
 const Home = () => {
+  // useNavigate
+  let navigate = useNavigate(); // create a method instance
+  let dispatch = useDispatch();
+
+  let { categories } = useSelector((state) => state.product);
+
+  let getCategories = async () => {
+    try {
+      let url = `http://localhost:3001/categories`;
+      let options = {
+        method: "GET",
+      };
+      let response = await fetch(url, options);
+      let data = await response.json();
+      dispatch(saveCategories(data));
+    } catch (error) {
+      alert("Server error:: " + error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (categories.length === 0) getCategories();
+  }, []);
   return (
     <>
       <div className="container-fluid categories" style={{ marginTop: "60px" }}>
         <div className="container">
-          <div className="d-flex justify-content-between catemobile">
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/offers.webp" alt="" />
-              </div>
-              <div className="catname">Top Offers</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/Grocery.webp" alt="" />
-              </div>
-              <div className="catname">Grocery</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/Mobiles.webp" alt="" />
-              </div>
-              <div className="catname">Mobiles</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/Fashion.webp" alt="" />
-              </div>
-              <div className="catname">Fashion</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/Electronics.webp" alt="" />
-              </div>
-              <div className="catname">Electronics</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/Home.webp" alt="" />
-              </div>
-              <div className="catname">Home</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/Appliances.webp" alt="" />
-              </div>
-              <div className="catname">Appliances</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img width="64px" src="/img/category/Travel.webp" alt="" />
-              </div>
-              <div className="catname">Travel</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img
-                  width="64px"
-                  src="/img/category/Beauty, Toys & More.webp"
-                  alt=""
-                />
-              </div>
-              <div className="catname">Beauty, Toys & More</div>
-            </div>
-            <div className="items text-center">
-              <div className="catimg">
-                <img
-                  width="64px"
-                  src="/img/category/Two Wheelers.webp"
-                  alt=""
-                />
-              </div>
-              <div className="catname">Two Wheelers</div>
-            </div>
+          <div className="d-flex justify-content-start gap-4 catemobile">
+            {categories.map((category, index) => {
+              return (
+                <div
+                  className="items text-center border-1"
+                  key={index}
+                  onClick={() => navigate("/products")}
+                >
+                  <div className="catimg">
+                    <img width="64px" height="50px" src={category.img} alt="" />
+                  </div>
+                  <div className="catname text-capitalize">{category.name}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -386,7 +360,7 @@ const Home = () => {
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

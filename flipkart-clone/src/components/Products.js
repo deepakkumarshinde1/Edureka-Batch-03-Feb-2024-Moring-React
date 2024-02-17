@@ -1,13 +1,22 @@
 const Products = () => {
   let getProductData = async () => {
-    let url = `https://fakestoreapi.com/products`;
-    let options = {
-      method: "GET",
-    };
-    let response = await fetch(url, options);
-    let data = await response.json();
-    console.log(data);
+    try {
+      let url = `http://localhost:3001/posts`;
+      let options = {
+        method: "GET",
+      };
+      let response = await fetch(url, options);
+      let data = await response.json();
+      console.log(data);
+    } catch (error) {
+      alert("Server error:: " + error.message);
+    }
   };
+
+  // promises are the methods which are async in nature
+  // run --> success --> resolve --> try{} or then()
+  // run --> fail --> rejected --> catch{} or catch()
+
   return (
     <>
       <div className="container" style={{ marginTop: "60px" }}>
