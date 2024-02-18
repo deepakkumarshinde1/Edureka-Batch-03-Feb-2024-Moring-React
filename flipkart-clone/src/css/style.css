@@ -543,3 +543,8 @@ img.cartpImg {
   height: 100px;
   width: 100px;
 }
+
+.add-shadow:hover {
+  box-shadow: 0 0 5px 0 gray;
+  transform: scale(1.05);
+}

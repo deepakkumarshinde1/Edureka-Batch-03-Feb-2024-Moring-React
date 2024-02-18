@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   // useNavigate
-  let navigate = useNavigate(); // create a method instance
+  const navigate = useNavigate(); // create a method instance
   let dispatch = useDispatch();
 
   let { categories } = useSelector((state) => state.product);
@@ -16,13 +16,15 @@ const Home = () => {
       let options = {
         method: "GET",
       };
-      let response = await fetch(url, options);
+      const response = await fetch(url, options);
       let data = await response.json();
       dispatch(saveCategories(data));
     } catch (error) {
       alert("Server error:: " + error.message);
     }
   };
+
+  // window.location.assign()
 
   useEffect(() => {
     if (categories.length === 0) getCategories();
@@ -37,7 +39,9 @@ const Home = () => {
                 <div
                   className="items text-center border-1"
                   key={index}
-                  onClick={() => navigate("/products")}
+                  onClick={() =>
+                    navigate(`/products/${category.name.replaceAll(" ", "-")}`)
+                  }
                 >
                   <div className="catimg">
                     <img width="64px" height="50px" src={category.img} alt="" />

@@ -1,12 +1,16 @@
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 const Header = () => {
+  let { cart } = useSelector((state) => state.product);
   return (
     <>
       <div className="container-fluid bg_blue fixed-top">
         <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-light ">
-            <a className="navbar-brand" href="#">
+          <nav className="navbar navbar-expand-lg navbar-light p-2">
+            <Link className="navbar-brand" to="/">
               <img src="/img/flipkartlogo.png" width="75px" alt="" />
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -90,11 +94,14 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    {" "}
-                    <i className="bi bi-cart-fill"></i>
+                  <Link className="nav-link position-relative" to="/my-cart">
+                    <i className="bi bi-cart-fill mx-1"></i>
                     Cart
-                  </a>
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {cart.length}
+                      <span className="visually-hidden">unread messages</span>
+                    </span>
+                  </Link>
                 </li>
               </ul>
             </div>

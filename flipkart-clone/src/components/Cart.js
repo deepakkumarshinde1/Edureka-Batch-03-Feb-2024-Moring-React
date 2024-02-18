@@ -1,4 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
+import { handelCart } from "../redux/product.slice";
+
 const Cart = () => {
+  let { cart } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  // const addCart = (product) => {
+  //   let payload = {
+  //     opt: "add",
+  //     product,
+  //   };
+  //   dispatch(handelCart(payload));
+  // };
+
+  // const removeFromCart = (product) => {
+  //   let payload = {
+  //     opt: "remove",
+  //     product,
+  //   };
+  //   dispatch(handelCart(payload));
+  // };
   return (
     <>
       <div className="container" style={{ marginTop: "60px" }}>
@@ -11,92 +31,58 @@ const Cart = () => {
             <div className="d-non">
               <div className="card mb-3">
                 <div className="card-body">
-                  <div className="d-flex">
-                    <div className="px-4">
-                      <img
-                        src="/img/productimg/productdetails.webp"
-                        className="cartpImg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="">
-                      <p className="card-title">
-                        JUARI BE A GENTLEMAN Printed Men Round Neck White
-                      </p>
-                      <div className="text-secondary">
-                        <p className="mb-0">Size: S</p>
-                        <p>Seller:JUARI</p>
+                  {cart.map((product) => {
+                    return (
+                      <div className="d-flex border-bottom py-2">
+                        <div className="px-4">
+                          <img
+                            src={product.image}
+                            className="cartpImg"
+                            alt=""
+                          />
+                        </div>
+                        <div className="">
+                          <p className="card-title">{product.title}</p>
+                          <div className="text-secondary">
+                            <p className="text-capitalize">
+                              Category:{product.category}
+                            </p>
+                          </div>
+
+                          <p className="card-text">₹ {product.price} /-</p>
+                          <span className="text-primary">
+                            Quantity: {product.qty}
+                          </span>
+                          <button
+                            className="btn btn-success btn-sm mx-3"
+                            onClick={() => {
+                              dispatch(
+                                handelCart({
+                                  opt: "add",
+                                  product,
+                                })
+                              );
+                            }}
+                          >
+                            Add
+                          </button>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() => {
+                              dispatch(
+                                handelCart({
+                                  opt: "remove",
+                                  product,
+                                })
+                              );
+                            }}
+                          >
+                            Remove
+                          </button>
+                        </div>
                       </div>
-
-                      <p className="card-text">₹94,800</p>
-                      <a href="#" className="btn ">
-                        Save for Later
-                      </a>
-                      <a href="#" className="btn ">
-                        Remove
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-3">
-                <div className="card-body d-flex  justify-content-end">
-                  <a
-                    href="#"
-                    className="btn btn-danger btn btn-danger px-5 py-2 brnone"
-                    style={{ backgroundColor: "#fb641b" }}
-                  >
-                    PLACE ORDER
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="d-none">
-              <div className="card mb-3">
-                <div className="card-body">
-                  <div className="mb-2">
-                    <div>1. Login or SigUp</div>
-                    <div className="w-50">
-                      <input
-                        type="text"
-                        className="form-control mt-3 mb-3"
-                        placeholder="Enter Email/Mobile Number"
-                      />
-
-                      <a
-                        href="#"
-                        className="btn btn-danger btn btn-danger px-5 py-2 brnone"
-                        style={{ backgroundColor: "#fb641b" }}
-                      >
-                        CONTINUE
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-3">
-                <div className="card-body">
-                  <div className="mb-2">
-                    <div>2. DELIVERY ADDRESS</div>
-                    <div className="bg-light py-2 px-3 mt-3">
-                      Add new Address
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-3">
-                <div className="card-body">
-                  <div className="mb-2">
-                    <div>3. ORDER SUMMARY</div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-3">
-                <div className="card-body">
-                  <div className="mb-2">
-                    <div>3. PAYMENT OPTION</div>
-                  </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="card mb-3">
