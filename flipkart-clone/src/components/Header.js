@@ -1,10 +1,72 @@
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  let userName = useRef();
+  let password = useRef();
   let { cart } = useSelector((state) => state.product);
+
+  let makeLogin = () => {
+    console.log(userName.current.value);
+    console.log(password.current.value);
+  };
   return (
     <>
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Login
+              </h5>
+
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="mb-3">
+                <input
+                  type="email"
+                  className="form-control rounded-0"
+                  placeholder="Enter Email"
+                  required
+                  ref={userName}
+                />
+              </div>
+              <div className="mb-3">
+                <input
+                  type="password"
+                  className="form-control rounded-0"
+                  placeholder="Enter Password"
+                  required
+                  ref={password}
+                />
+              </div>
+            </div>
+            <div className="modal-footer  justify-content-center">
+              {/* <!-- <button type="button" className="btn btn-primary">Login</button> --> */}
+              <button
+                type="button"
+                className="btn btn-primary btn-sm rounded-0"
+                onClick={makeLogin}
+              >
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container-fluid bg_blue fixed-top">
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light p-2">

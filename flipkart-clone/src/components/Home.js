@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveCategories } from "../redux/product.slice";
+import { getCategories, saveCategories } from "../redux/product.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
@@ -10,24 +10,10 @@ const Home = () => {
 
   let { categories } = useSelector((state) => state.product);
 
-  let getCategories = async () => {
-    try {
-      let url = `http://localhost:3001/categories`;
-      let options = {
-        method: "GET",
-      };
-      const response = await fetch(url, options);
-      let data = await response.json();
-      dispatch(saveCategories(data));
-    } catch (error) {
-      alert("Server error:: " + error.message);
-    }
-  };
-
   // window.location.assign()
 
   useEffect(() => {
-    if (categories.length === 0) getCategories();
+    if (categories.length === 0) dispatch(getCategories());
   }, []);
   return (
     <>
@@ -360,64 +346,6 @@ const Home = () => {
           </div>
         </div>
       </footer>
-
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Login
-              </h5>
-
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <p className="p-3 p-3 pb-0">
-              Get access to your Orders, Wishlist and Recommendations
-            </p>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Your Name"
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Email/Mobile no"
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Password"
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer  justify-content-center">
-              <button type="button" className="btn btn-primary">
-                Sign Up
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 };

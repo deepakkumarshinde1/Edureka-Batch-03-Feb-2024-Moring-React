@@ -199,5 +199,14 @@
       "name": "women's clothing",
       "img": "/img/category/Fashion.webp"
     }
+  ],
+  "users": [
+    {
+      "id": 989877655,
+      "name": "Deepakkumar",
+      "email": "deepak@gmail.com",
+      "password": "admin@123",
+      "mobile": 9897654321
+    }
   ]
 }

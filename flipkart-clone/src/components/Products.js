@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { handelCart, saveProductList } from "../redux/product.slice";
+import {
+  getProductData,
+  handelCart,
+  saveProductList,
+} from "../redux/product.slice";
 
 // class component
 // handel a comp lifecycle
@@ -19,27 +23,12 @@ const Products = () => {
   const { productList } = useSelector((state) => state.product);
   let { cat_name } = useParams(); // collect a data(dynamic) from url
 
-  const getProductData = async () => {
-    try {
-      cat_name = cat_name.replaceAll("-", " ");
-      const url = `http://localhost:3001/products?category=${cat_name}`;
-      const options = {
-        method: "GET",
-      };
-      let response = await fetch(url, options);
-      let data = await response.json();
-      dispatch(saveProductList(data));
-    } catch (error) {
-      alert("Server error:: " + error.message);
-    }
-  };
-
   // promises are the methods which are async in nature
   // run --> success --> resolve --> try{} or then()
   // run --> fail --> rejected --> catch{} or catch()
 
   useEffect(() => {
-    getProductData();
+    dispatch(getProductData(cat_name));
   }, []); // only once i.e on mounting
 
   useEffect(() => {
@@ -126,64 +115,6 @@ const Products = () => {
               </div>
             );
           })}
-        </div>
-
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Login
-                </h5>
-
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <p className="p-3 p-3 pb-0">
-                Get access to your Orders, Wishlist and Recommendations
-              </p>
-              <div className="modal-body">
-                <form>
-                  <div className="mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter Your Name"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter Email/Mobile no"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter Password"
-                    />
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer  justify-content-center">
-                <button type="button" className="btn btn-primary">
-                  Sign Up
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>

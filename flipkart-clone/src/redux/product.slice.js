@@ -8,9 +8,11 @@ const ProductSlice = createSlice({
     cart: [],
   },
   reducers: {
+    getCategories: () => {},
     saveCategories(state, action) {
       state.categories = action.payload;
     },
+    getProductData: () => {},
     saveProductList(state, action) {
       state.productList = action.payload;
     },
@@ -45,6 +47,11 @@ const ProductSlice = createSlice({
   },
 });
 
-export const { saveCategories, saveProductList, handelCart } =
-  ProductSlice.actions;
+export const {
+  saveCategories,
+  saveProductList,
+  handelCart,
+  getCategories,
+  getProductData,
+} = ProductSlice.actions;
 export default ProductSlice;
