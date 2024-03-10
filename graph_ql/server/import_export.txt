@@ -1,0 +1,15 @@
+// common js
+// import a file
+// const moduleName = require('moduleName')
+
+// module js
+// import a file
+// import moduleName  from 'moduleName'
+
+// common js
+// export a file
+// module.exports = moduleName
+
+// module js
+// export a file
+// export default moduleName
